@@ -10,6 +10,7 @@ namespace ApiBundle\Form\Traits;
 
 use ApiBundle\Form\BookmarkType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Valid;
 
 trait BookmarkTypeTrait
 {
@@ -17,6 +18,8 @@ trait BookmarkTypeTrait
      * @param FormBuilderInterface $builder
      */
     private function buildBookmarkForm(FormBuilderInterface $builder): void {
-        $builder->add('bookmark', BookmarkType::class);
+        $builder->add('bookmark', BookmarkType::class, [
+            'constraints' => array(new Valid()),
+        ]);
     }
 }

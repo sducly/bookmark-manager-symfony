@@ -12,6 +12,7 @@ namespace ApiBundle\Form\Traits;
 use ApiBundle\Form\DataTransformer\TagTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Valid;
 
 trait TaggableTypeTrait
 {
@@ -31,7 +32,9 @@ trait TaggableTypeTrait
      * @param FormBuilderInterface $builder
      */
     private function buildTagForm(FormBuilderInterface $builder): void {
-        $builder->add('tags', TextType::class);
+        $builder->add('tags', TextType::class, [
+            'constraints' => array(new Valid()),
+        ]);
         $builder->get('tags')->addModelTransformer($this->tagTransformer);
     }
 }

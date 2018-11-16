@@ -9,8 +9,8 @@
 namespace ApiBundle\Entity;
 
 use ApiBundle\Entity\Traits\EntityTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Bookmark
@@ -26,18 +26,21 @@ class Bookmark
     /**
      * @var string $url
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $url;
 
     /**
      * @var string $title
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @var string $authorName
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $authorName;
 

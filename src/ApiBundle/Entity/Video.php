@@ -6,6 +6,7 @@ use ApiBundle\Entity\Traits\BookmarkableTrait;
 use ApiBundle\Entity\Traits\EntityTrait;
 use ApiBundle\Entity\Traits\MediaTrait;
 use ApiBundle\Entity\Traits\TaggableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,10 +21,10 @@ class Video
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="duration", type="integer")
+     * @Assert\NotBlank()
+     * @ORM\Column(name="duration", type="integer", nullable=false)
      */
-    private $duration;
+    private $duration = null;
 
 
     /**
@@ -44,7 +45,7 @@ class Video
      *
      * @return int
      */
-    public function getDuration(): int
+    public function getDuration(): ?int
     {
         return $this->duration;
     }

@@ -4,6 +4,7 @@ namespace ApiBundle\Entity;
 
 use ApiBundle\Entity\Traits\EntityTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tag
@@ -18,6 +19,7 @@ class Tag
     /**
      * @var string $label
      * @ORM\Column(name="label", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $label;
 

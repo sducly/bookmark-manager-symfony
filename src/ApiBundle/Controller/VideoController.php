@@ -2,8 +2,8 @@
 
 namespace ApiBundle\Controller;
 
-use ApiBundle\Entity\Picture;
-use ApiBundle\Form\PictureType;
+use ApiBundle\Entity\Video;
+use ApiBundle\Form\VideoType;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/pictures")
+ * @Route("/videos")
  */
-class PictureController extends Controller
+class VideoController extends Controller
 {
     public function __construct(EntityManagerInterface $manager) {
         $this->manager = $manager;
@@ -28,9 +28,9 @@ class PictureController extends Controller
      * )
      * @Rest\View
      */
-    public function showAction(Picture $picture)
+    public function showAction(Video $video)
     {
-        return $picture;
+        return $video;
     }
 
     /**
@@ -39,16 +39,15 @@ class PictureController extends Controller
      */
     public function postAction(Request $request)
     {
-        $picture = new Picture();
-        $form = $this->createForm(PictureType::class, $picture);
+        $video = new Video();
+        $form = $this->createForm(VideoType::class, $video);
         $form->submit($request->request->all());
 
         if($form->isValid()) {
-            $this->manager->persist($picture);
+            $this->manager->persist($video);
             $this->manager->flush();
-            return $picture;
+            return $video;
         }
-
     }
 
     /**
@@ -58,15 +57,16 @@ class PictureController extends Controller
      * )
      * @Rest\View
      */
-    public function putAction(Picture $picture, Request $request)
+    public function putAction(Video $video, Request $request)
     {
-        $form = $this->createForm(PictureType::class, $picture);
+        $form = $this->createForm(VideoType::class, $video);
         $form->submit($request->request->all());
 
         if($form->isValid()) {
             $this->manager->flush();
-            return $picture;
+            return $video;
         }
+
     }
 
     /**
@@ -78,13 +78,13 @@ class PictureController extends Controller
      */
     public function deleteAction(int $id)
     {
-        $picture = $this->getDoctrine()->getRepository(Picture::class)->find($id);
+        $video = $this->getDoctrine()->getRepository(Video::class)->find($id);
 
-        if(!$picture) {
-                return new JsonResponse(['message' => 'Picture not found'], Response::HTTP_NOT_FOUND);
+        if(!$video) {
+            return new JsonResponse(['message' => 'Video not found'], Response::HTTP_NOT_FOUND);
         }
 
-        $this->manager->remove($picture);
+        $this->manager->remove($video);
         $this->manager->flush();
     }
 }

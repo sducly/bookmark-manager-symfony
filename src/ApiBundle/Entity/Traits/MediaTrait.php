@@ -24,6 +24,12 @@ trait MediaTrait
     private $height;
 
     /**
+     * @var int $thumbnailUrl
+     * @ORM\Column(type="string")
+     */
+    private $thumbnailUrl;
+
+    /**
      * @return int
      */
     public function getWidth(): ?int
@@ -56,6 +62,24 @@ trait MediaTrait
     public function setHeight(int $height)
     {
         $this->height = $height;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getThumbnailUrl(): ?string
+    {
+        return $this->thumbnailUrl;
+    }
+
+    /**
+     * @param int $thumbnailUrl
+     * @return MediaTrait
+     */
+    public function setThumbnailUrl($thumbnailUrl)
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
         return $this;
     }
 

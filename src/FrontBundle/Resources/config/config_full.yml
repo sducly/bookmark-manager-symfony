@@ -1,0 +1,5 @@
+umbrella_core:
+    webpack:
+        dev_server_enable: false
+        dev_server_host: http://127.0.0.1
+        dev_server_port: 9000

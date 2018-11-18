@@ -18,6 +18,7 @@ trait MediaTypeTrait
     private function buildMediaForm(FormBuilderInterface $builder): void {
         $builder
             ->add('width')
-            ->add('height');
+            ->add('height')
+            ->add('thumbnailUrl');
     }
 }

@@ -1,0 +1,15 @@
+/*
+ * Footer
+ */
+ .mastfoot {
+    background: $dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, .5);
+    height: 2rem;
+
+    p {
+        margin: 0;
+    }
+  }

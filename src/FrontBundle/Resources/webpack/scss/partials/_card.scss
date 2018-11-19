@@ -1,32 +1,32 @@
 .card {
-    max-width: 42rem;
-    margin: auto;
+  max-width: 42rem;
+  margin: auto;
 
-    .card-header {
-        background-color: $dark;
-        color: white!important;
-        height: 5rem;
-        padding: .5rem 2rem !important;
-        align-items: center;
-        display: flex;
-      
-        .bg-default {
-          flex-grow: 1;
-          text-align: left;
-        }
+  .card-header {
+    background-color: $dark;
+    color: white !important;
+    height: 5rem;
+    padding: .5rem 2rem !important;
+    align-items: center;
+    display: flex;
 
-      h5 {
-          margin: 0;
-      }
+    .bg-default {
+      flex-grow: 1;
+      text-align: left;
     }
 
-    .card-body {
-        padding-top: 1.5rem !important;
-      .input-group-text {
-        background: $dark;
-          i {
-            color: white!important;
-        }
+    h5 {
+      margin: 0;
+    }
+  }
+
+  .card-body {
+    padding-top: 1.5rem !important;
+    .input-group-text {
+      background: $dark;
+      i {
+        color: white !important;
       }
     }
   }
+}

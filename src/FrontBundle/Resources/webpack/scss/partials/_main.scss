@@ -2,13 +2,13 @@
  * Cover
  */
 .cover {
-    padding: 1.5rem;
-    margin: -7.5rem auto 0 auto;
-    max-width: calc(100% - 10rem);
-    width: 100%;
-    background: white;
-    border-radius: 0.2rem;
-  
+  padding: 1.5rem;
+  margin: -7.5rem auto 0 auto;
+  max-width: calc(100% - 10rem);
+  width: 100%;
+  background: white;
+  border-radius: 0.2rem;
+
   .btn-lg {
     padding: .75rem 1.25rem;
     font-weight: 700;
@@ -24,19 +24,19 @@
       color: $dark;
       cursor: pointer;
     }
-  
+
     a + a {
       margin-left: 1rem;
     }
   }
-  
+
   .page-item {
     &.active {
       .page-link {
-      background: $dark;
-      color: rgba(255,255,255, 0.5);
+        background: $dark;
+        color: rgba(255, 255, 255, 0.5);
       }
+    }
   }
-}
 }
   

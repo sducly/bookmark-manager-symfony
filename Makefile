@@ -3,8 +3,7 @@ WEBPACK=node_modules/.bin/webpack
 WEBPACK_DEV_SERVER=node_modules/.bin/webpack-dev-server
 WEBPACK_DASHBOARD=node_modules/.bin/webpack-dashboard
 
-install-dev: vendor-install node-install db-create db-update webpack-dev
-install: vendor-install db-create db-update
+install: vendor-install node-install db-create db-update webpack-dev
 
 update-dev: project-update vendor-update node-update db-update cc-dev cc-prod
 update: project-update vendor-update db-update cc-prod

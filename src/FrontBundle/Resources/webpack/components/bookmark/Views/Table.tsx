@@ -3,10 +3,11 @@ import TableDTO from "../../../dto/TableDTO";
 import BookmarkEndpoint from "../../../endpoints/bookmarkEndpoint";
 import HTTP from "../../../services/Http";
 import Bookmark from "../../../models/bookmark";
-import Row from "./Row";
+import Row from "./Includes/Row";
 import Pagination from "../../pagination/Views/Pagination";
-import Confirm from "./Confirm";
+import Confirm from "./Includes/Confirm";
 import { ITableState } from "../interface";
+import { Link } from "react-router-dom";
 
 class Table extends React.Component<any, ITableState> {
 
@@ -42,10 +43,9 @@ class Table extends React.Component<any, ITableState> {
 
     public render() {
         return <React.Fragment>
-            <h1 className="cover-heading">
-                All bookmarks
-            </h1>
-
+            <Link to="/edit/0" className={"btn btn-dark btn-toolbar"}>
+                Add a bookmark
+            </Link>
             <table className="table table-striped">
                 <thead>
                     <tr>

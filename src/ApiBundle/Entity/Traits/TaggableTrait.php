@@ -21,7 +21,7 @@ trait TaggableTrait
 
     /**
      * @var ArrayCollection $tags
-     * @ORM\ManyToMany(targetEntity="ApiBundle\Entity\Tag", cascade={"all"}, orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="ApiBundle\Entity\Tag", cascade={"all"})
      */
     private $tags;
 
@@ -40,5 +40,6 @@ trait TaggableTrait
     public function removeTag(Tag $tag) {
         $this->tags->removeElement($tag);
     }
+
 
 }

@@ -8,7 +8,12 @@
 
 namespace ApiBundle\Entity;
 
+use ApiBundle\Entity\Traits\BookmarkableTrait;
 use ApiBundle\Entity\Traits\EntityTrait;
+use ApiBundle\Entity\Traits\MediaTrait;
+use ApiBundle\Entity\Traits\TaggableTrait;
+use ApiBundle\Entity\Traits\VideoTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,11 +22,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="bookmark")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\BookmarkRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Bookmark
 {
 
-    use EntityTrait;
+    use EntityTrait, MediaTrait, TaggableTrait, VideoTrait;
 
     /**
      * @var string $url
@@ -61,6 +67,7 @@ class Bookmark
      */
     public function __construct()
     {
+        $this->tags = new ArrayCollection();
         $this->addedDate = new \DateTime('NOW');
     }
 
@@ -106,6 +113,7 @@ class Bookmark
     public function getAuthorName(): ?string
     {
         return $this->authorName;
+        return $this;
     }
 
     /**
@@ -152,6 +160,16 @@ class Bookmark
     {
         $this->thumbnailUrl = $thumbnailUrl;
         return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function cleanVideo()
+    {
+        if($this->video && !$this->video->getDuration()) {
+            $this->video = null;
+        }
     }
 
 

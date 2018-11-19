@@ -69,9 +69,8 @@ swiftmailer:
     spool: { type: memory }
 
 sensio_framework_extra:
-    request: { converters: true }
-    router:
-        annotations: false
+    view: { annotations: true }
+
 jms_serializer:
     handlers:
         datetime:
@@ -84,12 +83,12 @@ front:
         dev_server_port: 9010
 
 fos_rest:
-    body_converter:
-        enabled: true
+    body_listener: true
+    param_fetcher_listener: true
+    routing_loader: true
+    view:
+        view_response_listener: 'force'
     format_listener:
         rules:
-            - { path: ^/(|contact)$, stop: true }
-            - { path: '^/api', priorities: ['json'], fallback_format: 'json' }
-    view:
-        view_response_listener: true
-        formats: { json: true, xml: false, rss: false }
+            - { path: ^/api, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
+            - { path: ^/, stop: true }

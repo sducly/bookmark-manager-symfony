@@ -1,3 +1,10 @@
+.btn-dark {
+  background-color: $dark;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  color: #fff;
+  border: .05rem solid #fff;
+}
+
 .btn-secondary {
   &:hover, &:focus {
     color: $dark;

@@ -14,15 +14,22 @@
     font-weight: 700;
   }
 
-  a {
-    color: $dark;
-    cursor: pointer;
+  .btn-toolbar {
+    float: left;
+    margin-bottom: 1.5rem;
   }
 
-  a + a {
-    margin-left: 1rem;
+  table {
+    a {
+      color: $dark;
+      cursor: pointer;
+    }
+  
+    a + a {
+      margin-left: 1rem;
+    }
   }
-
+  
   .page-item {
     &.active {
       .page-link {

@@ -8,18 +8,18 @@
 
 namespace ApiBundle\Form\Traits;
 
-use ApiBundle\Form\BookmarkType;
+use ApiBundle\Form\VideoType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Valid;
 
-trait BookmarkTypeTrait
+trait VideoTypeTrait
 {
     /**
      * @param FormBuilderInterface $builder
      */
-    private function buildBookmarkForm(FormBuilderInterface $builder): void {
-        $builder->add('bookmark', BookmarkType::class, [
-            'constraints' => array(new Valid()),
+    private function buildVideoForm(FormBuilderInterface $builder): void {
+        $builder->add('video', VideoType::class, [
+            'required' => false
         ]);
     }
 }

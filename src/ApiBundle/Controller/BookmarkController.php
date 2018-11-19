@@ -4,6 +4,7 @@ namespace ApiBundle\Controller;
 
 use ApiBundle\Entity\Bookmark;
 use ApiBundle\Entity\Picture;
+use ApiBundle\Form\BookmarkType;
 use ApiBundle\Form\PictureType;
 use ApiBundle\Model\TableResponse;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,14 +28,12 @@ class BookmarkController extends Controller
     }
 
     /**
-     * @Rest\Get(
-     *     path = "/{page}",
-     *     requirements = {"page"="\d+"}
-     * )
+     * @Rest\Get("/")
      * @Rest\View
      */
-    public function showAction($page = 1)
+    public function list(Request $request)
     {
+        $page = $request->get('page');
         $bookmarkRepository = $this->manager->getRepository(Bookmark::class);
         $bookmarks = $bookmarkRepository->findPerPage($page, self::OFFSET);
         $nbBookmarks = $bookmarkRepository->count([]);
@@ -48,6 +47,56 @@ class BookmarkController extends Controller
             ->setCurrentPage($page);
     }
 
+    /**
+     * @Rest\Get(
+     *     path = "/{id}",
+     *     requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
+     */
+    public function showAction(Bookmark $bookmark)
+    {
+        return $bookmark;
+    }
+
+    /**
+     * @Rest\Post("")
+     * @Rest\View
+     */
+    public function postAction(Request $request)
+    {
+        $bookmark = new Bookmark();
+        $form = $this->createForm(BookmarkType::class, $bookmark);
+        $form->submit($request->request->all());
+
+        if($form->isValid()) {
+            $this->manager->persist($bookmark);
+            $this->manager->flush();
+            return $bookmark;
+        }
+
+    }
+
+    /**
+     * @Rest\Put(
+     *     path = "/{id}",
+     *     requirements = {"id"="\d+"}
+     * )
+     * @Rest\View
+     */
+    public function putAction(Bookmark $bookmark, Request $request)
+    {
+
+        $form = $this->createForm(BookmarkType::class, $bookmark);
+        $form->submit($request->request->all());
+
+        if($form->isValid()) {
+            $this->manager->flush();
+            return $bookmark;
+        }
+
+    }
+    
     /**
      * @Rest\Delete(
      *     path = "/{id}",

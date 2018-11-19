@@ -3,15 +3,18 @@
     margin: auto;
 
     .card-header {
-      .bg-default {
-        padding-left: 2rem;
-        align-items: center;
         background-color: $dark;
         color: white!important;
         height: 5rem;
+        padding: .5rem 2rem !important;
         align-items: center;
         display: flex;
-      }
+      
+        .bg-default {
+          flex-grow: 1;
+          text-align: left;
+        }
+
       h5 {
           margin: 0;
       }

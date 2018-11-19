@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
-import { IConfirmProps } from '../interface';
+import { IConfirmProps } from '../../interface';
 
 export default class Confirm extends React.Component<IConfirmProps, {}> {
     constructor(props: any) {

@@ -17,24 +17,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
-    use EntityTrait, BookmarkableTrait, MediaTrait, TaggableTrait;
+    use EntityTrait;
 
     /**
      * @var int
-     * @Assert\NotBlank()
-     * @ORM\Column(name="duration", type="integer", nullable=false)
+     * @ORM\Column(name="duration", type="integer", nullable=true)
      */
     private $duration = null;
 
 
     /**
      * Set duration.
-     *
      * @param int $duration
-     *
      * @return Video
      */
-    public function setDuration(int $duration): Video
+    public function setDuration(int $duration = null): Video
     {
         $this->duration = $duration;
         return $this;

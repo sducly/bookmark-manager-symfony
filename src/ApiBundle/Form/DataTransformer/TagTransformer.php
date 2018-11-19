@@ -37,12 +37,13 @@ class TagTransformer implements DataTransformerInterface
      * @param String $tagsAsString
      * @return ArrayCollection
      */
-    public function reverseTransform($tagsAsString): ArrayCollection
+    public function reverseTransform($postTags): ArrayCollection
     {
         $tags = new ArrayCollection();
 
-        foreach(explode(', ', $tagsAsString) as $label) {
+        foreach($postTags as $tag) {
 
+            $label = $tag['label'];
             $tag = $this->service->findTagByLabel($label);
 
             if(!$tag) {

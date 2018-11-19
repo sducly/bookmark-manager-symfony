@@ -9,8 +9,7 @@ export default () => {
         </h3>
             <nav className="nav nav-masthead justify-content-center">
                 <NavLink exact to="/" className="nav-link" activeClassName={"active"}>Home</NavLink>
-                <NavLink to="/about" className="nav-link" activeClassName={"active"}>About</NavLink>
-                <NavLink to="/topics" className="nav-link" activeClassName={"active"}>Topics</NavLink>
+                <NavLink to="/contact" className="nav-link" activeClassName={"active"}>Contact</NavLink>
             </nav>
         </div>
     </header>

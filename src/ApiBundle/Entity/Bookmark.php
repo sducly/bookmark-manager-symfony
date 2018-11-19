@@ -51,6 +51,12 @@ class Bookmark
     private $addedDate;
 
     /**
+     * @var string $thumbnailUrl
+     * @ORM\Column(type="string")
+     */
+    private $thumbnailUrl;
+
+    /**
      * Bookmark constructor.
      */
     public function __construct()
@@ -127,6 +133,24 @@ class Bookmark
     public function setAddedDate(?\DateTime $addedDate): ?Bookmark
     {
         $this->addedDate = $addedDate;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnailUrl(): ?string
+    {
+        return $this->thumbnailUrl;
+    }
+
+    /**
+     * @param string $thumbnailUrl
+     * @return Bookmark
+     */
+    public function setThumbnailUrl($thumbnailUrl): ?Bookmark
+    {
+        $this->thumbnailUrl = $thumbnailUrl;
         return $this;
     }
 

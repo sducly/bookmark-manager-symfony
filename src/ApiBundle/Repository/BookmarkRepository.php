@@ -1,6 +1,8 @@
 <?php
 
 namespace ApiBundle\Repository;
+use ApiBundle\Entity\Bookmark;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * PictureRepository
@@ -10,4 +12,18 @@ namespace ApiBundle\Repository;
  */
 class BookmarkRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param int $page
+     * @param int $offset
+     * @return ArrayCollection|Bookmark[]
+     */
+    public function findPerPage(int $page, int $offset): array {
+        return $this
+            ->createQueryBuilder('b')
+            ->setMaxResults($offset)
+            ->setFirstResult(($page - 1) * $offset)
+            ->getQuery()
+            ->getResult();
+
+    }
 }

@@ -1,0 +1,29 @@
+.card {
+    max-width: 42rem;
+    margin: auto;
+
+    .card-header {
+      .bg-default {
+        padding-left: 2rem;
+        align-items: center;
+        background-color: $dark;
+        color: white!important;
+        height: 5rem;
+        align-items: center;
+        display: flex;
+      }
+      h5 {
+          margin: 0;
+      }
+    }
+
+    .card-body {
+        padding-top: 1.5rem !important;
+      .input-group-text {
+        background: $dark;
+          i {
+            color: white!important;
+        }
+      }
+    }
+  }

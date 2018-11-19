@@ -17,6 +17,7 @@ trait BookmarkableTrait
     /**
      * @var Bookmark $bookmark
      * @ORM\OneToOne(targetEntity="ApiBundle\Entity\Bookmark", cascade={"all"})
+     * @ORM\JoinColumn(name="bookmark_id", referencedColumnName="id", onDelete="cascade")
      */
     private $bookmark;
 

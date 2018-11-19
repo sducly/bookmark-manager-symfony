@@ -1,12 +1,13 @@
 import * as React from "react";
-import Table from "../components/table/Views/Table";
+import Table from "../../bookmark/Views/Table";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Header, Footer } from "../components/layout";
+import { Header, Footer } from "..";
+import Main from "../../contact/Views/Main";
 
 const basename = (process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? "app_dev.php" : "";
-function BasicExample() {
-    console.log(process.env.environement);
+
+export default () => {
     return (
         <Router basename={basename}>
                 <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -15,7 +16,7 @@ function BasicExample() {
 
                     <main role="main" className="inner cover">
                         <Route exact path="/" component={Table} />
-                        <Route path="/about" component={About} />
+                        <Route path="/contact" component={Main} />
                     </main>
 
                     <Footer/>
@@ -23,13 +24,3 @@ function BasicExample() {
         </Router>
     );
 }
-
-function About() {
-    return (
-        <div>
-            <h2>About</h2>
-        </div>
-    );
-}
-
-export default BasicExample;

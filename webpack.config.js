@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const Dotenv = require('dotenv-webpack');
 
 const is_dev_env = process.env.NODE_ENV === "development";
 
@@ -43,6 +44,7 @@ if (is_dev_env) {
     WEBPACK_CONFIG.devtool = "source-map";
 
     WEBPACK_CONFIG.plugins = [
+        new Dotenv(),
         new DashboardPlugin(),
         new ExtractTextPlugin(CONFIG.output.css),
         new webpack.HotModuleReplacementPlugin(),

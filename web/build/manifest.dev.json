@@ -1,0 +1,11 @@
+{
+  "/build/fo.js": "/build/fo.dev.js",
+  "/build/fo.css": "/build/fo.dev.css",
+  "/build/fo.js.map": "/build/fo.dev.js.map",
+  "/build/fo.css.map": "/build/fo.dev.css.map",
+  "/build/public/fonts/fontawesome-webfont.eot?v=4.7.0": "/build/public/fonts/fontawesome-webfont.eot",
+  "/build/public/fonts/fontawesome-webfont.svg?v=4.7.0": "/build/public/fonts/fontawesome-webfont.svg",
+  "/build/public/fonts/fontawesome-webfont.ttf?v=4.7.0": "/build/public/fonts/fontawesome-webfont.ttf",
+  "/build/public/fonts/fontawesome-webfont.woff?v=4.7.0": "/build/public/fonts/fontawesome-webfont.woff",
+  "/build/public/fonts/fontawesome-webfont.woff2?v=4.7.0": "/build/public/fonts/fontawesome-webfont.woff2"
+}

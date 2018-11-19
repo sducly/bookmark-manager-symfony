@@ -22,6 +22,7 @@ class BookmarkRepository extends \Doctrine\ORM\EntityRepository
             ->createQueryBuilder('b')
             ->setMaxResults($offset)
             ->setFirstResult(($page - 1) * $offset)
+            ->orderBy('b.addedDate', 'DESC')
             ->getQuery()
             ->getResult();
 

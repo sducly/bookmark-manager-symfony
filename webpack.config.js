@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const Dotenv = require('dotenv-webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const is_dev_env = process.env.NODE_ENV === "development";
 
@@ -27,8 +28,8 @@ if (is_dev_env) {
     CONFIG.output.css = '[name].dev.css';
     CONFIG.output.manifest = 'manifest.dev.json';
 } else {
-    CONFIG.output.js = '[name].prod.js';
-    CONFIG.output.css = '[name].prod.css';
+    CONFIG.output.js = '[name]_[chunkhash].prod.js';
+    CONFIG.output.css = '[name]_[chunkhash].prod.css';
     CONFIG.output.manifest = 'manifest.prod.json';
 }
 
@@ -70,12 +71,15 @@ if (is_dev_env) {
     };
 
 } else {
+    WEBPACK_CONFIG.optimization = {
+        minimizer: [
+            new UglifyJsPlugin()
+        ]
+    }
     WEBPACK_CONFIG.plugins = [
+        new Dotenv(),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
         new ExtractTextPlugin(CONFIG.output.css),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {warnings: false},
-            output: {comments: false}
-        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false

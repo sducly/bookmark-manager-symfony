@@ -57,6 +57,10 @@
         ]
     },
     "config": {
+        "component-dir": "web/assets",
+        "platform": {
+            "php": "7.2"
+        },
         "sort-packages": true
     },
     "extra": {

@@ -8,6 +8,11 @@ export interface IRowProps {
     confirmAction: Function;
 }
 
+export interface IFormProps {
+    bookmark: Bookmark;
+    id: number;
+}
+
 export interface ITableState extends TableDTO {
     needConfirmation: boolean,
     deletedBookmark?: Bookmark

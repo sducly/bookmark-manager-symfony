@@ -6,7 +6,7 @@ import { Header, Footer } from "..";
 import Main from "../../contact/Views/Main";
 import Edit from "../../bookmark/Views/Edit";
 
-const basename = (process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? "app_dev.php" : "";
+const basename = (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? "app_dev.php" : "";
 
 export default () => {
     return (

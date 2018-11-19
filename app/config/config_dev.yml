@@ -3,9 +3,11 @@ imports:
 
 framework:
     router:
-        resource: '%kernel.project_dir%/app/config/routing_dev.yml'
+        resource: '%kernel.root_dir%/config/routing_dev.yml'
         strict_requirements: true
     profiler: { only_exceptions: false }
+    assets:
+        json_manifest_path: '%kernel.root_dir%/../web/build/manifest.dev.json'
 
 web_profiler:
     toolbar: true

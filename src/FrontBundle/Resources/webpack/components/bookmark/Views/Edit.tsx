@@ -5,22 +5,25 @@ import { InputWidget } from "../../widget";
 import Bookmark from "../../../models/bookmark";
 import HTTP from "../../../services/Http";
 import BookmarkEndpoint from "../../../endpoints/bookmarkEndpoint";
-import { BookmarkForm } from "./Includes/BookmarkForm";
-import { VideoForm } from "./Includes/VideoForm";
+
 import MediaEndpoint from "../../../endpoints/MediaEndpoint";
-import Video from "../../../models/video";
+
 import { Redirect } from "react-router";
-import Tag from "../../../models/tags";
+
+import Form from "./Includes/Form";
+import BookmarkTransformer from "../../../services/BookmarkTransformer";
 
 export default class Edit extends React.Component<IEditProps, IEditState> {
 
     private HTTP = new HTTP();
     private endpoint = new BookmarkEndpoint();
     private mediaEnpoint = new MediaEndpoint();
+    private transformer = new BookmarkTransformer();
 
     constructor(props: IEditProps) {
         super(props);
         this.handleChangeUrl = this.handleChangeUrl.bind(this);
+        this.postData = this.postData.bind(this);
 
         this.state = {
             bookmark: undefined,
@@ -52,8 +55,8 @@ export default class Edit extends React.Component<IEditProps, IEditState> {
             return null;
         }
 
-        if(redirectUrl) {
-            return <Redirect to={redirectUrl}/>
+        if (redirectUrl) {
+            return <Redirect to={redirectUrl} />
         }
 
         return <React.Fragment>
@@ -69,9 +72,10 @@ export default class Edit extends React.Component<IEditProps, IEditState> {
                     <img src={bookmark.thumbnailUrl} height="100%" />
                 </div>
                 <div className="card-body p-3">
-                    <form onSubmit={(e) => this.postData(e)}>
 
-                        {/* Fake url use to fetch data from api */}
+                    <form onSubmit={this.postData}>
+
+                        {/* Fake url input use to fetch data from api */}
                         <InputWidget
                             name="_tempUrl"
                             defaultValue={bookmark.url}
@@ -87,15 +91,8 @@ export default class Edit extends React.Component<IEditProps, IEditState> {
                             <br />
                         </div>
 
-                        <BookmarkForm bookmark={bookmark} id={id}/>
+                        <Form bookmark={bookmark} id={id} />
 
-                        <VideoForm bookmark={bookmark} />
-
-                        {/* Confirm button */}
-                        <input
-                            type="submit"
-                            className="btn btn-dark col-lg-12"
-                            value="OK" />
                     </form>
                 </div>
             </div>
@@ -103,29 +100,6 @@ export default class Edit extends React.Component<IEditProps, IEditState> {
 
         </React.Fragment>
     }
-
-    /**
-     * Post data to api
-     * @param e 
-     */
-    private postData(e: any) {
-        e.preventDefault();
-        
-        const bookmark = this.hydrateBookmark(e.target.elements);
-        
-        const id = e.target.elements['id'].value;
-        if(id > 0) {    
-            this.HTTP.Put(this.endpoint, bookmark, id);
-        } else {
-            this.HTTP.Post(this.endpoint, bookmark);
-        }
-
-        this.setState({
-            redirectUrl: "/"
-        })
-        return false;
-    }
-
 
     /**
      * Check if url is valid
@@ -149,7 +123,7 @@ export default class Edit extends React.Component<IEditProps, IEditState> {
             });
 
             const bookmark = await this.HTTP.Get<Bookmark>(this.mediaEnpoint, url, "url");
-            
+
             if (bookmark.title) {
                 this.setState({
                     bookmark,
@@ -163,34 +137,26 @@ export default class Edit extends React.Component<IEditProps, IEditState> {
         }
     }
 
-    /** Convert form data to bookmark */
-    private hydrateBookmark(data: []) {
-        let bookmark = new Bookmark();
-        bookmark.authorName = data['authorName'].value;
-        bookmark.height = data['height'].value;
-        bookmark.width = data['width'].value;
-        bookmark.title = data['title'].value;
-        bookmark.thumbnailUrl = data['thumbnailUrl'].value;
-        //bookmark.tags = data['tags'].value();
-        bookmark.url = data['url'].value;
-        
-        if(data['duration'] && data['duration'].value) {
-            let video = new Video();
-            video.duration = data['duration'].value
-            bookmark.video = video;
+    /**
+     * Post data to api
+     * @param e 
+     */
+    private postData(e: any) {
+        e.preventDefault();
+
+        const bookmark = this.transformer.transformFormToBookmark(e.target.elements);
+
+        const id = e.target.elements['id'].value;
+        if (id > 0) {
+            this.HTTP.Put(this.endpoint, bookmark, id);
+        } else {
+            this.HTTP.Post(this.endpoint, bookmark);
         }
 
-        const tagsAsString = data['tags'].value;
-        const tags:Tag[] = [];
-        
-        tagsAsString.split(",").map((label: string) => {
-            let tag:Tag = new Tag();
-            tag.label = label;
-            tags.push(tag);
-        });
-
-        bookmark.tags = tags;
-        
-        return bookmark;
+        this.setState({
+            redirectUrl: "/"
+        })
+        return false;
     }
+
 }

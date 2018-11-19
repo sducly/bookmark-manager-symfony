@@ -4,7 +4,9 @@ import { InputWidget } from "../../../widget";
 
 export const VideoForm = ({ bookmark }: { bookmark: Bookmark }) => {
     if (bookmark.video) {
+
         const duration = bookmark.video ? bookmark.video.duration : 0;
+        
         return <InputWidget
                 name="duration"
                 defaultValue={duration ? duration.toString(): ""}
